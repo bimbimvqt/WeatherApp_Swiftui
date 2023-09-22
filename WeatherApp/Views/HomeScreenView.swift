@@ -9,15 +9,31 @@ import SwiftUI
 
 struct HomeScreenView: View {
     
+    
+    let currentDateTime = Date()
+      
+      static let stackDateFormat: DateFormatter = {
+          let formatter = DateFormatter()
+          formatter.dateFormat = "MM, dd"
+          return formatter
+      }()
+    
+    @StateObject private var viewModel = WeatherViewModel(weatherService: WeatherService())
+    
     var body: some View {
         GeometryReader { geo in
             ZStack {
                 BackgroundColor()
                 
                 ScrollView {
-                    VStack {
+                    VStack(spacing: 0) {
                         
-                        Image("sub_logo")
+                        Image(viewModel.weatherIcon)
+                            .resizable()
+                            .frame(minWidth: 0, maxWidth: geo.size.width * 0.5)
+                            .frame(minHeight: 0, maxHeight: geo.size.height * 0.3)
+                            .aspectRatio(contentMode: .fit)
+                            .padding()
                         
                         sumaryView
                         
@@ -25,7 +41,10 @@ struct HomeScreenView: View {
                         
                         Image("house").resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 336, height: 198, alignment: .center)
+                            .frame(minWidth: 0, maxWidth: geo.size.width)
+                            .frame(minHeight: 0, maxHeight: geo.size.height)
+                            .padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
+                            
                         
                         weatherDay
                         
@@ -36,76 +55,79 @@ struct HomeScreenView: View {
                 
             }
            
+        }.onAppear{
+            viewModel.refresh()
         }
         
     }
+    
+    
+    var weatherDay: some View {
+        
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color(hex: 0x362A84), Color(hex: 0x8C4BAD)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            VStack {
+                HStack {
+                    Text("Today")
+                        .foregroundColor(Color.white)
+                    Spacer()
+                    Text(currentDateTime, format: Date.FormatStyle().month().day())                .foregroundColor(Color.white)
+                    
+                }.padding(.horizontal, 50.0)
+                Divider().background(Color.white)
+                HStack {
+                    WeatherInfo(temp: viewModel.temperature, imageName: viewModel.weatherIcon, num: viewModel.temperature)
+                    WeatherInfo(temp: viewModel.temperature, imageName: viewModel.weatherIcon, num: viewModel.temperature)
+                    WeatherInfo(temp: viewModel.temperature, imageName: viewModel.weatherIcon, num: viewModel.temperature)
+                    WeatherInfo(temp: viewModel.temperature, imageName: viewModel.weatherIcon, num: viewModel.temperature)
+                }
+            }.padding()
+            
+        }
+        .padding(.bottom, 30)
+        .clipShape(RoundedCorner(radius: 30, corners: [.topLeft, .topRight]))
+        
+    }
+   
+    
+    var maxmin: some View {
+        HStack {
+            Text("Max: \(Int(viewModel.tempMax))°C")
+                .foregroundColor(Color.white)
+                .font(.title2)
+            Text("Min: \(Int(viewModel.tempMax))°C")
+                .foregroundColor(Color.white)
+                .font(.title2)
+        }
+        
+    }
+
     
     var sumaryView: some View {
         VStack{
-            Text("19°")
-                .font(.system(size: 44))
+            Text(viewModel.temperature)
+                .font(.title2)
                 .foregroundColor(Color.white)
                 .fontWeight(.medium)
-            Text("Precipitations")
+            Text(viewModel.weatherDescription)
                 .foregroundColor(Color.white)
-                .font(.system(size: 24))
+                .font(.title3)
         }
         
     }
     
 }
 
-var weatherDay: some View {
-    
-    ZStack {
-        LinearGradient(gradient: Gradient(colors: [Color(hex: 0x362A84), Color(hex: 0x8C4BAD)]), startPoint: .topLeading, endPoint: .bottomTrailing)
-        VStack {
-            HStack {
-                Text("Today")
-                    .foregroundColor(Color.white)
-                Spacer()
-                Text("July, 21")                .foregroundColor(Color.white)
-                
-            }.padding(.horizontal, 50.0)
-            Divider().background(Color.white)
-            HStack {
-                WeatherInfo(temp: 19, imageName: "logo", num: 15)
-                WeatherInfo(temp: 18, imageName: "logo", num: 16)
-                WeatherInfo(temp: 19, imageName: "logo", num: 12)
-                WeatherInfo(temp: 19, imageName: "logo", num: 25)
-            }
-        }.padding()
-        
-    }
-    .clipShape(RoundedCorner(radius: 30, corners: [.topLeft, .topRight]))
-    
-}
-
-
-var maxmin: some View {
-    HStack {
-        Text("Max: 24°")
-            .foregroundColor(Color.white)
-            .font(.system(size: 24))
-        Text("Min: 18°")
-            .foregroundColor(Color.white)
-            .font(.system(size: 24))
-    }
-    
-}
 
 
 
-struct HomeScreenView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeScreenView()
-    }
-}
+
 
 struct WeatherInfo: View {
-    var temp: Int
+
+    var temp: String
     var imageName: String
-    var num: Int
+    var num: String
     var body: some View {
         VStack {
             Text("\(temp)")
@@ -117,3 +139,13 @@ struct WeatherInfo: View {
     }
 }
 
+
+
+
+
+
+struct HomeScreenView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeScreenView()
+    }
+}

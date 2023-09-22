@@ -28,23 +28,20 @@ struct CardView: View {
                 
                 Text("Sunset 5:28 AM")
                     .foregroundColor(Color.white)
-               
+                
             }
             .padding()
-           
+            
             
         }
-    
-        .frame(maxWidth: 161,maxHeight: 150
-        )
+        .frame(minWidth: 0, maxWidth: 161, minHeight: 0, maxHeight: 150)
         .cornerRadius(20)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .inset(by: 1)
+                .stroke(Color.init(hex: 0xF7CBFD), lineWidth: 1)
+        )
         
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                        .inset(by: 1)
-                    .stroke(Color.init(hex: 0xF7CBFD), lineWidth: 1)
-            )
-
     }
 }
 

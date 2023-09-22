@@ -1,20 +1,25 @@
 import SwiftUI
 
 struct WeatherScreenView: View {
+    
+    @State private var shouldRefresh = false
+
     @State private var currentIndex = 0
+    
+//    @ObservedObject var viewModel: WeatherViewModel
+    @StateObject private var viewModel = WeatherViewModel(weatherService: WeatherService())
+
+    
     private func scrollToOffset(_ offset: CGFloat, _ proxy: ScrollViewProxy) {
-           withAnimation {
-               proxy.scrollTo(offset, anchor: .trailing)
-           }
-       }
+        withAnimation {
+            proxy.scrollTo(offset, anchor: .trailing)
+        }
+    }
     @State private var xOffset: CGFloat = 1
     
     private let minOffset: CGFloat = 0
     private let maxOffset: CGFloat = 120
     var body: some View {
-        
-        
-        
         GeometryReader { geo in
             ZStack {
                 
@@ -23,25 +28,25 @@ struct WeatherScreenView: View {
                 ScrollView {
                     VStack(spacing: 0.0) {
                         Spacer().frame(height: 30)
-                        Text("North America")
-                            .font(.title2)
+                        Text(viewModel.cityName)
+                            .font(.title)
                             .foregroundColor(Color.white)
                             .padding()
                         
                         
                         HStack(spacing: 20) {
-                            Text("Max: 24°C")
+                            Text("Min: \(Int(viewModel.tempMin))°C")
                                 .font(.title2)
                                 .foregroundColor(Color.white)
                             
-                            Text("Max: 24°C")
+                            Text("Max: \(Int(viewModel.tempMax))°C")
                                 .font(.title2)
                                 .foregroundColor(Color.white)
                         }
                         
                         
                         Text("7-Days Forecasts")
-                            .font(.title)
+                            .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(Color.white)
                         
@@ -64,7 +69,7 @@ struct WeatherScreenView: View {
                                     ScrollView(.horizontal, showsIndicators: false) {
                                         HStack(spacing: 25) {
                                             ForEach(0..<5) { index in
-                                                DailyForecastView(tmp: "19", imageLink: "logo", days: "MON")
+                                                DailyForecastView(tmp: viewModel.temperature, imageLink: viewModel.weatherIcon, days: "MON")
                                             }
                                             .offset(x: xOffset)
                                         }
@@ -95,24 +100,32 @@ struct WeatherScreenView: View {
                             HStack{
                                 CardView()
                                 CardView()
-                                
-                            }.padding()
+                            }
                             Spacer()
-                        }
-                        
+                        }.padding()
                         
                         Spacer()
                     }
                 }
                 
             }
-        }.ignoresSafeArea(.all)
+        }
+        .padding(.bottom, 30)
+        .onAppear {
+            if !shouldRefresh {
+                viewModel.refresh()
+                shouldRefresh = true
+            }
+        }
+        .ignoresSafeArea(.all)
+        
+        
         
     }
 }
 
 var SeeMoreCard: some View {
-    ZStack{
+    ZStack {
         LinearGradient(gradient: Gradient(colors: [Color(hex: 0x362A84), Color(hex: 0x8C4BAD)]), startPoint: .topLeading, endPoint: .bottomTrailing)
         
         VStack {
@@ -149,7 +162,6 @@ var SeeMoreCard: some View {
         
     }
     .cornerRadius(20)
-    .frame(height: 174)
     .padding(.horizontal, 10)
     .padding()
 }

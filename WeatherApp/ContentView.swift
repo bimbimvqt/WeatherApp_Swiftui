@@ -42,14 +42,16 @@ struct ContentView: View {
                 HStack {
                     HStack {
                         TabItems(width: geometry.size.width/5, height: geometry.size.height/30, systemIconName: "location", tabName: "Home", tabbarRouter: tabbarRouter,assignedPage: .home)
+                            .padding(EdgeInsets.init(top: 8, leading: 0, bottom: 40, trailing: 0))
                         
                         TabItems(width: geometry.size.width/5, height: geometry.size.height/30, systemIconName: "plus.circle", tabName: "Map", tabbarRouter: tabbarRouter,assignedPage: .map)
+                            .padding(EdgeInsets.init(top: 8, leading: 0, bottom: 40, trailing: 0))
                         
                         TabItems(width: geometry.size.width/5, height: geometry.size.height/48, systemIconName: "line.3.horizontal", tabName: "Profile", tabbarRouter: tabbarRouter,assignedPage: .video)
-                            .padding(EdgeInsets.init(top: 8, leading: 0, bottom: 10, trailing: 0))
+                            .padding(EdgeInsets.init(top: 8, leading: 0, bottom: 40, trailing: 0))
                     }
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height/10)
+                .frame(width: geometry.size.width, height: geometry.size.height/40)
                 .background(BackgroundColor().shadow(radius: 2).frame(height: 100))
             }
             .edgesIgnoringSafeArea(.all)

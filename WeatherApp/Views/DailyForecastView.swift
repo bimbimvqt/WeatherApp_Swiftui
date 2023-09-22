@@ -9,6 +9,8 @@ import SwiftUI
 
 
 struct DailyForecastView: View {
+    
+    
     let tmp: String
     let imageLink: String
     let days: String
@@ -17,7 +19,7 @@ struct DailyForecastView: View {
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [Color(hex: 0x3E2D8F), Color(hex: 0x9D52AC)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 VStack {
-                    Text("\(tmp)°C")
+                    Text("\(tmp)")
                         .foregroundColor(Color.white)
                     Image(imageLink).resizable()
                         .aspectRatio(contentMode: .fit)

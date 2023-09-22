@@ -10,39 +10,50 @@ import SwiftUI
 struct GetStartedScreenView: View {
     var body: some View {
         NavigationView {
-            ZStack{
-                BackgroundColor()
-                VStack {
-                    Image("logo")
-                    
-                    Text("Weather")
-                        .font(.system(size: 64))
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.white)
-                    
-                    
-                    Text("ForeCasts")
-                        .font(.system(size: 64))
-                        .fontWeight(.medium)
-                        .foregroundColor(Color(hex: 0xDDB130))
-                    
-                    NavigationLink {
-                        ContentView()
-                            .navigationBarHidden(true)
-                    } label: {
-                        Button("Get Started") {
+            GeometryReader { geo in
+                ZStack{
+                    BackgroundColor()
+                    VStack {
+                        Image("logo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(minWidth: 0, maxWidth: 300, minHeight: 0, maxHeight: 300)
+                            .padding(.top, 30)
+                        
+                        Text("Weather")
+                            .font(.largeTitle)
+                            .fontWeight(.heavy)
+                            .foregroundColor(Color.white)
+                        
+                        
+                        
+                        Text("ForeCasts")
+                            .font(.largeTitle)
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color(hex: 0xDDB130))
+                        
+                        
+                        Spacer()
+                        NavigationLink {
+                            ContentView()
+                                .navigationBarHidden(true)
+                        } label: {
+                            Button("Get Started") {
+                                
+                            }
+                            .padding(.horizontal, 80)
+                            .padding(.vertical, 20)
+                            .foregroundColor(Color.black)
+                            .background(Capsule().fill(Color.orange))
+                            .font(.title2)
+                            
                             
                         }
-                        .padding(.horizontal, 100)
-                        .padding(.vertical, 20)
-                        .foregroundColor(Color.white)
-                        .background(Capsule().fill(Color.orange))
-                        
+                        Spacer()
                     }
-                    Spacer().padding(.bottom, 120)
+                    
                 }
-                
-            }
+            }.ignoresSafeArea(.all)
             
         }
     }

@@ -13,8 +13,10 @@
 		839EE2972AB999BC00F36C29 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839EE2962AB999BC00F36C29 /* CardView.swift */; };
 		83B458012ABBEA9E008E174B /* TabItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B458002ABBEA9E008E174B /* TabItems.swift */; };
 		83B458032ABBF08C008E174B /* TabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B458022ABBF08C008E174B /* TabBarRouter.swift */; };
-		83B4580D2ABC165D008E174B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4580C2ABC165D008E174B /* LocationManager.swift */; };
 		83B458172ABC2A8A008E174B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 83B458162ABC2A8A008E174B /* Alamofire */; };
+		83CA187A2ABD2AD3004866E8 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CA18792ABD2AD3004866E8 /* WeatherService.swift */; };
+		83CA187C2ABD2B00004866E8 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CA187B2ABD2B00004866E8 /* WeatherViewModel.swift */; };
+		83CA187E2ABD2B2E004866E8 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CA187D2ABD2B2E004866E8 /* Weather.swift */; };
 		83E5B9362AB81532001B901A /* WeatherAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5B9352AB81532001B901A /* WeatherAppApp.swift */; };
 		83E5B9382AB81532001B901A /* GetStartedScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5B9372AB81532001B901A /* GetStartedScreenView.swift */; };
 		83E5B93A2AB81534001B901A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E5B9392AB81534001B901A /* Assets.xcassets */; };
@@ -33,7 +35,9 @@
 		839EE2962AB999BC00F36C29 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		83B458002ABBEA9E008E174B /* TabItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItems.swift; sourceTree = "<group>"; };
 		83B458022ABBF08C008E174B /* TabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarRouter.swift; sourceTree = "<group>"; };
-		83B4580C2ABC165D008E174B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		83CA18792ABD2AD3004866E8 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		83CA187B2ABD2B00004866E8 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		83CA187D2ABD2B2E004866E8 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		83E5B9322AB81532001B901A /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E5B9352AB81532001B901A /* WeatherAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppApp.swift; sourceTree = "<group>"; };
 		83E5B9372AB81532001B901A /* GetStartedScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedScreenView.swift; sourceTree = "<group>"; };
@@ -75,12 +79,14 @@
 			path = CustomColor;
 			sourceTree = "<group>";
 		};
-		83B4580B2ABC1645008E174B /* Managers */ = {
+		83CA18782ABD2A97004866E8 /* APIServices */ = {
 			isa = PBXGroup;
 			children = (
-				83B4580C2ABC165D008E174B /* LocationManager.swift */,
+				83CA18792ABD2AD3004866E8 /* WeatherService.swift */,
+				83CA187B2ABD2B00004866E8 /* WeatherViewModel.swift */,
+				83CA187D2ABD2B2E004866E8 /* Weather.swift */,
 			);
-			path = Managers;
+			path = APIServices;
 			sourceTree = "<group>";
 		};
 		83E5B9292AB81532001B901A = {
@@ -102,7 +108,7 @@
 		83E5B9342AB81532001B901A /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
-				83B4580B2ABC1645008E174B /* Managers */,
+				83CA18782ABD2A97004866E8 /* APIServices */,
 				8312C9132ABA8BEE00A543A8 /* CustomColor */,
 				8312C9102ABA872E00A543A8 /* CustomText */,
 				83E5B9572AB93367001B901A /* Views */,
@@ -235,12 +241,14 @@
 				83E5B9502AB822DC001B901A /* HomeScreenView.swift in Sources */,
 				839EE27B2AB96ED500F36C29 /* DailyForecastView.swift in Sources */,
 				83E5B95D2AB94063001B901A /* ContentView.swift in Sources */,
-				83B4580D2ABC165D008E174B /* LocationManager.swift in Sources */,
 				83E5B9382AB81532001B901A /* GetStartedScreenView.swift in Sources */,
 				83E5B9362AB81532001B901A /* WeatherAppApp.swift in Sources */,
+				83CA187A2ABD2AD3004866E8 /* WeatherService.swift in Sources */,
 				83B458032ABBF08C008E174B /* TabBarRouter.swift in Sources */,
+				83CA187E2ABD2B2E004866E8 /* Weather.swift in Sources */,
 				83E5B95F2AB940ED001B901A /* WeatherScreenView.swift in Sources */,
 				839EE2972AB999BC00F36C29 /* CardView.swift in Sources */,
+				83CA187C2ABD2B00004866E8 /* WeatherViewModel.swift in Sources */,
 				83E5B9532AB83484001B901A /* Shapes.swift in Sources */,
 				8312C9152ABA8C0400A543A8 /* BackgroundColor.swift in Sources */,
 				8312C9122ABA874600A543A8 /* CustomText.swift in Sources */,
